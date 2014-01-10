@@ -1,0 +1,54 @@
+doctype html
+html
+  head
+    title backbone + underscore js loader
+
+    link rel="stylesheet" href="css/bootstrap.min.css"
+    link rel="stylesheet" href="css/bootstrap-theme.min.css"
+    link rel="stylesheet" href="css/style.css"
+
+  body
+    div.container-fluid
+      h3 Backbone power bills
+
+      div.row
+        div.col-sm-6#data-view
+          div.row
+            div.col-xs-5
+              div.input-group
+                input.form-control#newValue type="text" placeholder="Enter new data"
+                span.input-group-addon kW
+            div.col-xs-2.middle-word Or
+            div.col-xs-5
+              input.form-control#newReading type="text" placeholder="Enter new reading"
+          div.row
+            div.col-xs-12
+              table.table.table-hover.table-bordered.table-striped
+                thead
+                  tr
+                    th Date
+                    th Consumption
+                    th Cost
+                tbody
+              ul.pager
+                li.previous
+                  a#older href="#older-records" &larr; Older
+                li.next
+                  a#newer href="#newer-records" Newer &rarr;
+
+        div.col-sm-6#chart-view
+          svg.center-block width="500" height="500"
+            linearGradient#bar-gradient-1 gradientUnits="userSpaceOnUse" x1="0" y1="500" x2="0" y2="0"
+              stop offset="0" stop-color="#007dff"
+              stop offset="1" stop-color="#ff4e00"
+
+    script src="js/libs/moment-with-langs.js"
+    script src="js/libs/jquery-1.10.2.js"
+    script src="js/libs/underscore-min.js"
+    script src="js/libs/backbone-min.js"
+    script src="js/libs/backbone.localStorage.js"
+    script src="js/libs/d3.v3.min.js"
+
+    script src="js/model.js"
+    script src="js/chart.js"
+    script src="js/app.js"
