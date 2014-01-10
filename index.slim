@@ -45,12 +45,32 @@ html
                 stop offset="0" stop-color="#007dff"
                 stop offset="1" stop-color="#ff4e00"
 
+    div.modal.fade#welcome
+      div.modal-dialog
+        div.modal-content
+          div.modal-header
+            h4.modal-title Welcome to Backbone Power Bills
+          div.modal-body
+            p This software is meant for home use in Cuba
+            p You can keep your consumption of power month by month, and observe a
+              nice bars chart on the left which tops at th desired height
+            P The initial data required to work is the following:
+            p
+              form.form-horizontal role="form"
+                div.form-group
+                  label.control-label.col-xs-3 for="initialReading" Initial reading
+                  div.col-xs-9
+                    input.form-control#initialReading type="text" placeholder="Enter your initial reading here"
+          div.modal-footer
+            button.btn.btn-primary type="button" Save changes
+
     script src="js/libs/moment-with-langs.js"
     script src="js/libs/jquery-1.10.2.js"
     script src="js/libs/underscore-min.js"
     script src="js/libs/backbone-min.js"
     script src="js/libs/backbone.localStorage.js"
     script src="js/libs/d3.v3.min.js"
+    script src="js/libs/bootstrap.min.js"
 
     script src="js/model.js"
     script src="js/chart.js"

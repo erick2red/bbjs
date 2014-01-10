@@ -102,6 +102,8 @@ $(function() {
 
     offset: 0,
 
+    lastReading: 0,
+
     nextUTC: function() {
       if (!this.length) {
         return new Date().getTime() / 1000;

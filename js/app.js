@@ -15,6 +15,7 @@ $(function() {
 
     events: {
       "keypress #newValue": "addValue",
+      "keypress #newReading": "addReading",
       "click #older": "showOlder",
       "click #newer": "showNewer",
     },
@@ -28,6 +29,17 @@ $(function() {
       });
 
       this.valueInput.val('');
+    },
+
+    addReading: function(e) {
+      if (e.keyCode != 13) return;
+      if (!this.readingInput.val()) return;
+
+      readings.create({
+        q: parseInt(this.readingInput.val(), 10) - readings.lastReading,
+      });
+
+      this.readingInput.val('');
     },
 
     showOlder: function(e) {
@@ -58,7 +70,7 @@ $(function() {
       }
 
       if (readings.offset === readings.length - 12 ||
-          readings.length <= 12) {
+        readings.length <= 12) {
         $('li.previous').addClass("disabled");
       } else {
         $('li.previous').removeClass("disabled");
@@ -79,6 +91,11 @@ $(function() {
       updateChart();
 
       readings.on("add", updateChart);
+
+      readings.on('add', function(model, collection) {
+        readings.lastReading = readings.lastReading + parseInt(model.get('q'), 10);
+      });
+
       readings.on("offset", function(newOffset) {
         if (newOffset < 0) {
           return;
@@ -90,6 +107,45 @@ $(function() {
         d.render();
         updateChart();
       });
+
+      if (localStorage.initialReading) {
+        /* setting last reading */
+        total = readings.reduce(function(sum, item) {
+          return sum + parseInt(item.get('q'), 10);
+        }, 0);
+        readings.lastReading = parseInt(localStorage.initialReading, 10) + total;
+      }
     }
   });
+
+  /* initial data population */
+  if (localStorage.initialReading === undefined) {
+    $('#welcome').on('hidden.bs.modal', function(e) {
+      localStorage.initialReading = $('input#initialReading').val();
+
+      /* setting last reading */
+      total = readings.reduce(function(sum, item) {
+        return sum + parseInt(item.get('q'), 10);
+      }, 0);
+      readings.lastReading = parseInt(localStorage.initialReading, 10) + total;
+    });
+
+    $("#welcome form").on('submit', function(e) {
+      if (!$('input#initialReading').val()) return;
+
+      $('#welcome').modal('hide');
+      return false;
+    });
+
+    $("#welcome button").on('click', function(e) {
+      if (!$('input#initialReading').val()) return;
+
+      $('#welcome').modal('hide');
+    });
+
+    $("#welcome").modal({
+      backdrop: 'static',
+      keyboard: false,
+    });
+  }
 });
