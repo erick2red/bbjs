@@ -9,8 +9,6 @@ function updateChart() {
     months.push(moment(new Date(n.getFullYear(), n.getMonth())).format("MMM"));
   });
 
-  console.log("d1: " + JSON.stringify(d1));
-  console.log("months: " + JSON.stringify(months));
   makeChart(d1, months);
 }
 
@@ -27,8 +25,10 @@ function makeChart(data, months) {
   var ivScale = d3.scale.linear()
     .domain([350, 0]) /* plus fifty for margin */
     .range([0, h]);
+
+  months = [""].concat(months).concat([""]);
   var xScale = d3.scale.ordinal()
-    .domain(_(["", months, ""]).flatten())
+    .domain(months)
     .range(_([0, _.range(26, 500, 38)]).flatten());
 
   var vAxis = d3.svg.axis()
@@ -82,12 +82,14 @@ function makeChart(data, months) {
     .attr("font-weight", "bold")
     .attr("text-anchor", "middle");
 
-  if (d3.selectAll('g')[0].length === 0) {
+  if (d3.selectAll('g.axis')[0].length === 0) {
     svg.append("g")
       .attr("class", "axis")
       .attr("transform", "translate(36,10)")
       .call(vAxis);
-
+  }
+  if (d3.selectAll('g.xaxis text')[0].length < 13) {
+    d3.selectAll('g.xaxis').remove();
     svg.append("g")
       .attr("class", "xaxis")
       .attr("transform", "translate(36,490)")
@@ -96,8 +98,6 @@ function makeChart(data, months) {
 
   //Update X axis
   svg.select(".axis")
-    // .transition()
-    // .duration(1000)
     .call(vAxis);
   //Update X axis
   svg.select(".xaxis")
