@@ -37,10 +37,13 @@ html
                   a#newer href="#newer-records" Newer &rarr;
 
         div.col-sm-6#chart-view
-          svg.center-block width="500" height="500"
-            linearGradient#bar-gradient-1 gradientUnits="userSpaceOnUse" x1="0" y1="500" x2="0" y2="0"
-              stop offset="0" stop-color="#007dff"
-              stop offset="1" stop-color="#ff4e00"
+          div.row
+            h3.middle-word Last twelve months: charted
+          div.row
+            svg.center-block width="500" height="500"
+              linearGradient#bar-gradient-1 gradientUnits="userSpaceOnUse" x1="0" y1="500" x2="0" y2="0"
+                stop offset="0" stop-color="#007dff"
+                stop offset="1" stop-color="#ff4e00"
 
     script src="js/libs/moment-with-langs.js"
     script src="js/libs/jquery-1.10.2.js"
