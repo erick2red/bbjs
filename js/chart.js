@@ -1,13 +1,20 @@
 function updateChart() {
   records = _(readings.initial(readings.offset)).last(12);
-  var d1 = _(records).map(function(item) {
-    return parseInt(item.get('q'), 10);
+  var d1 = [];
+  var months = [];
+  _(records).each(function(item) {
+    d1.push(parseInt(item.get('q'), 10));
+
+    n = new Date(item.get('utc') * 1000);
+    months.push(moment(new Date(n.getFullYear(), n.getMonth())).format("MMM"));
   });
 
-  makeChart(d1);
+  console.log("d1: " + JSON.stringify(d1));
+  console.log("months: " + JSON.stringify(months));
+  makeChart(d1, months);
 }
 
-function makeChart(data) {
+function makeChart(data, months) {
   var w = 500;
   var h = 480;
   var bw = 30;
@@ -20,17 +27,16 @@ function makeChart(data) {
   var ivScale = d3.scale.linear()
     .domain([350, 0]) /* plus fifty for margin */
     .range([0, h]);
-  var xScale = d3.scale.linear()
-    .domain([0, 11])
-    .range([0, 500]);
+  var xScale = d3.scale.ordinal()
+    .domain(_(["", months, ""]).flatten())
+    .range(_([0, _.range(26, 500, 38)]).flatten());
 
   var vAxis = d3.svg.axis()
     .scale(ivScale)
     .orient("left");
   var xAxis = d3.svg.axis()
     .scale(xScale)
-    .orient("bottom")
-    .ticks(0);
+    .orient("top");
 
   var svg = d3.select("svg");
   if (svg.selectAll('rect')[0].length < data.length) {
@@ -76,14 +82,25 @@ function makeChart(data) {
     .attr("font-weight", "bold")
     .attr("text-anchor", "middle");
 
-  svg.append("g")
-    .attr("class", "axis")
-    .attr("transform", "translate(36,10)")
-    .call(vAxis);
+  if (d3.selectAll('g')[0].length === 0) {
+    svg.append("g")
+      .attr("class", "axis")
+      .attr("transform", "translate(36,10)")
+      .call(vAxis);
 
-  svg.append("g")
-    .attr("class", "axis")
-    .attr("transform", "translate(36,490)")
+    svg.append("g")
+      .attr("class", "xaxis")
+      .attr("transform", "translate(36,490)")
+      .call(xAxis);
+  }
+
+  //Update X axis
+  svg.select(".axis")
+    // .transition()
+    // .duration(1000)
+    .call(vAxis);
+  //Update X axis
+  svg.select(".xaxis")
     .call(xAxis);
 
   d3.selectAll("rect")
