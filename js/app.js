@@ -25,7 +25,6 @@ $(function() {
 
       readings.create({
         q: this.valueInput.val(),
-        utc: new Date().getTime() / 1000
       });
 
       this.valueInput.val('');

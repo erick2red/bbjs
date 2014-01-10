@@ -3,9 +3,11 @@ $(function() {
   console.log("Backbone.VERSION: " + Backbone.VERSION);
 
   Reading = Backbone.Model.extend({
-    defaults: {
-      q: 0,
-      utc: 0,
+    defaults: function() {
+      return {
+        q: 0,
+        utc: readings.nextUTC(),
+      };
     },
 
     date: function() {
@@ -99,6 +101,16 @@ $(function() {
     comparator: 'utc',
 
     offset: 0,
+
+    nextUTC: function() {
+      if (!this.length) {
+        return new Date().getTime() / 1000;
+      }
+
+      utc = this.last().get('utc') * 1000;
+      n = new Date(new Date(utc).getFullYear(), new Date(utc).getMonth() + 1);
+      return n.getTime() / 1000;
+    },
   });
 
   window.readings = new Readings();
