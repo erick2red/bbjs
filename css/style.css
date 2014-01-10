@@ -3,6 +3,15 @@
     margin-bottom: 10px;
 }
 
+#chart-view .row:first-child {
+    margin-bottom: -6px;
+}
+
+#chart-view .row:last-child {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 .middle-word {
     text-align: center;
     margin-top: 6px;
