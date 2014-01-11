@@ -1,6 +1,7 @@
 ## Backbone Power Bills
 
 Simple client-side app to keep records of your power bills
+
 Calculates cost based on cuban prices
 
 ## Using
