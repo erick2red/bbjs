@@ -9,6 +9,7 @@ $(function() {
       this.tableBody = this.$("table > tbody");
 
       this.row = _.template("<tr><td><%= date %></td><td><%= q %></td><td><%= cost %></td></tr>");
+      this.blankRow = _.template("<tr class=\"blank\"><td>-</td><td>0</td><td>0</td></tr>");
 
       this.listenTo(readings, "add", this.render);
     },
@@ -62,6 +63,12 @@ $(function() {
           cost: item.formatCost(),
         }));
       }, this);
+      if (records.length < 12) {
+        _(12 - records.length).times(function() {
+          this.tableBody.append(this.blankRow());
+        }, this);
+
+      }
 
       if (readings.offset === 0) {
         $('li.next').addClass("disabled");

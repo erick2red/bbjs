@@ -17,6 +17,10 @@
     margin-top: 6px;
 }
 
+tr.blank {
+    color: transparent;
+}
+
 .axis path, .axis line {
     fill: none;
     stroke: black;
