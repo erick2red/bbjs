@@ -138,7 +138,9 @@ RecordsView = React.createClass({
             <table className="table table-hover table-bordered table-striped">
               <thead>
                 <tr>
-                  <th>Date</th><th>Consumption</th><th>Cost</th>
+                  <th className="col-xs-4">Date</th>
+                  <th className="col-xs-4">Consumption</th>
+                  <th className="col-xs-4">Cost</th>
                 </tr>
               </thead>
               <tbody>{rowNodes}</tbody>
