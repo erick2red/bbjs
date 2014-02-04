@@ -13,28 +13,6 @@ html
 
       div.row
         div.col-sm-6#data-view
-          div.row
-            div.col-xs-5
-              div.input-group
-                input.form-control#newValue type="text" placeholder="Enter new data"
-                span.input-group-addon kW
-            div.col-xs-2.middle-word Or
-            div.col-xs-5
-              input.form-control#newReading type="text" placeholder="Enter new reading"
-          div.row
-            div.col-xs-12
-              table.table.table-hover.table-bordered.table-striped
-                thead
-                  tr
-                    th Date
-                    th Consumption
-                    th Cost
-                tbody
-              ul.pager
-                li.previous
-                  a#older href="#older-records" &larr; Older
-                li.next
-                  a#newer href="#newer-records" Newer &rarr;
 
         div.col-sm-6#chart-view
           div.row
@@ -72,6 +50,11 @@ html
     script src="js/libs/d3.v3.min.js"
     script src="js/libs/bootstrap.min.js"
 
+    / Added react
+    script src="js/libs/react-with-addons.min.js"
+    script src="js/libs/JSXTransformer.js"
+
     script src="js/model.js"
     script src="js/chart.js"
-    script src="js/app.js"
+    script type="text/jsx" src="js/app-react.js"
+    script src="js/loader.js"

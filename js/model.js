@@ -7,6 +7,7 @@ $(function() {
       return {
         q: 0,
         utc: readings.nextUTC(),
+        editing: false,
       };
     },
 

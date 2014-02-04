@@ -17,6 +17,14 @@
     margin-top: 6px;
 }
 
+.value.inactive {
+    display: none;
+}
+
+.value.active {
+    display: inline-block;
+}
+
 tr.blank {
     color: transparent;
 }
