@@ -105,6 +105,8 @@ $(function() {
 
     lastReading: 0,
 
+    maxConsumption: parseInt(localStorage.maxConsumption, 10) || 400,
+
     nextUTC: function() {
       if (!this.length) {
         return new Date().getTime() / 1000;

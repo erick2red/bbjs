@@ -48,6 +48,9 @@ $(function() {
         return sum + parseInt(item.get('q'), 10);
       }, 0);
       readings.lastReading = parseInt(localStorage.initialReading, 10) + total;
+
+      localStorage.maxConsumption = $('input#maxConsumption').val() || 400;
+      readings.maxConsumption = parseInt(localStorage.maxConsumption, 10);
     });
 
     $("#welcome form").on('submit', function(e) {

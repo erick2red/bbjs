@@ -18,12 +18,13 @@ function makeChart(data, months) {
   var bw = 30;
   var hmargin = 40;
   var vmargin = 10;
+  var maxVValue = readings.maxConsumption;
 
   var vscale = d3.scale.linear()
-    .domain([0, 350]) /* plus fifty for margin */
+    .domain([0, maxVValue]) /* plus fifty for margin */
     .range([0, h]);
   var ivScale = d3.scale.linear()
-    .domain([350, 0]) /* plus fifty for margin */
+    .domain([maxVValue, 0]) /* plus fifty for margin */
     .range([0, h]);
 
   months = [""].concat(months).concat([""]);
