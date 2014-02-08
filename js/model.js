@@ -13,7 +13,13 @@ $(function() {
 
     date: function() {
       n = new Date(this.get('utc') * 1000);
-      return moment(new Date(n.getFullYear(), n.getMonth())).format("MMMM, YYYY");
+      if (localStorage.mode == "daily") {
+        format = "MMMM D, YYYY";
+      } else {
+        format = "MMMM, YYYY";
+      }
+
+      return moment(n).format(format);
     },
 
     cost: function() {
@@ -113,7 +119,15 @@ $(function() {
       }
 
       utc = this.last().get('utc') * 1000;
-      n = new Date(new Date(utc).getFullYear(), new Date(utc).getMonth() + 1);
+      lastDate = new Date(utc);
+      console.log(lastDate);
+
+      if (localStorage.mode == "daily") {
+        n = new Date(lastDate.getFullYear(), lastDate.getMonth(), lastDate.getDate() + 1);
+      } else {
+        n = new Date(lastDate.getFullYear(), lastDate.getMonth() + 1);
+      }
+
       return n.getTime() / 1000;
     },
   });
