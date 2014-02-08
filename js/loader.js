@@ -51,6 +51,8 @@ $(function() {
 
       localStorage.maxConsumption = $('input#maxConsumption').val() || 400;
       readings.maxConsumption = parseInt(localStorage.maxConsumption, 10);
+
+      localStorage.mode = $('[type="radio"]:checked').val();
     });
 
     $("#welcome form").on('submit', function(e) {

@@ -3,6 +3,10 @@
     margin-bottom: 10px;
 }
 
+.form-group .radio {
+    margin-bottom: 4px;
+}
+
 #chart-view .row:first-child {
     margin-bottom: -6px;
 }

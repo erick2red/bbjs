@@ -42,10 +42,22 @@ html
                   label.control-label.col-xs-4 for="maxConsumption" Max consumption
                   div.col-xs-8
                     input.form-control#maxConsumption type="text" placeholder="Enter your estimated top consumption (400)"
+                div.form-group
+                  label.control-label.col-xs-4 Input frecuency
+                  div.col-xs-8
+                    div.radio
+                      label for="optionDaily"
+                        input#optionDaily type="radio" name="optionsRadios" value="daily"
+                        | Daily
+                    div.radio
+                      label for="optionMonthly"
+                        input#optionMonthly type="radio" name="optionsRadios" value="monthly" checked=true
+                        | Monthly
+
           div.modal-footer
             button.btn.btn-primary type="button" Save changes
 
-    script src="js/libs/moment-with-langs.js"
+    script src="js/libs/moment-with-langs.min.js"
     script src="js/libs/jquery-1.10.2.min.js"
     script src="js/libs/underscore-min.js"
     script src="js/libs/backbone-min.js"
