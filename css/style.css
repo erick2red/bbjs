@@ -26,10 +26,29 @@
 }
 
 .value.active {
-    display: inline-block;
+    display: block;
 }
 
-tr.blank {
+.value {
+    text-align: right;
+}
+
+span.value {
+    width: 60px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th:nth-last-child(-n + 2) {
+    text-align: center;
+}
+
+tr td:nth-last-child(-n + 1) {
+    text-align: end;
+    padding-right: 70px !important;
+}
+
+.blank {
     color: transparent;
 }
 
