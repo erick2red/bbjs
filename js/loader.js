@@ -15,6 +15,7 @@ $(function() {
           return sum + parseInt(item.get('q'), 10);
         }, 0);
         readings.lastReading = parseInt(localStorage.initialReading, 10) + total;
+        updateChart();
       });
 
       readings.on("offset", function(newOffset) {
